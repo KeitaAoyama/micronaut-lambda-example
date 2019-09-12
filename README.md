@@ -29,7 +29,7 @@ $ mn --version
 
 2. Run these commands.
 ```
-$ cd micronaut-labmda-example
+$ cd micronaut-lambda-example
 
 $ gradlew shadowJar
 
