@@ -1,4 +1,4 @@
-# micronaut-labmda-example
+# micronaut-lambda-example
 
 A sample AWS Lambda Function which returns a list of yummy or not yummy food, depending on your request parameter.
 
