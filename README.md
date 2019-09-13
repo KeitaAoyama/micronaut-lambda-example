@@ -23,7 +23,7 @@ $ mn --version
   | JVM Version: 1.8.0_144  
 ```
 
-## Tesiting with SAM CLI
+## Testing with SAM CLI
 
 1. Clone this repository.
 
