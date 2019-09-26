@@ -7,11 +7,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest
 class FoodFunctionTest {
@@ -29,30 +27,21 @@ class FoodFunctionTest {
     void testFunctionGetYummyFood() {
         final FoodRequest request = new FoodRequest();
         request.setYummy(true);
-        final List<Food> actual = client.apply(request).blockingGet().getFoodList();
-        final List<Food> expected = Arrays.asList(
-                new Food("Soba", true),
-                new Food("Yakitori", true),
-                new Food("Ramen", true));
-
-        assertThat(actual, is(expected));
+        final List<Food> foodList = client.apply(request).blockingGet().getFoodList();
+        assertTrue(foodList.stream().allMatch(Food::isYummy));
     }
 
     @Test
     void testFunctionGetNotYummyFood() {
         final FoodRequest request = new FoodRequest();
         request.setYummy(false);
-        final List<Food> actual = client.apply(request).blockingGet().getFoodList();
-        final List<Food> expected = Arrays.asList(
-                new Food("Sushi", false),
-                new Food("Sashimi", false));
-
-        assertThat(actual, is(expected));
+        final List<Food> foodList = client.apply(request).blockingGet().getFoodList();
+        assertTrue(foodList.stream().noneMatch(Food::isYummy));
     }
 
     @AfterAll
     static void afterAll() {
-        server.close();
+        server.stop();
     }
 
 }
